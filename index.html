@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Delights - Dessert Menu</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Desserts</h1>
+      </header>
+
+      <div class="menu-container">
+        <section class="menu-grid" id="menuGrid">
+          <!-- Menu items will be populated by JavaScript -->
+        </section>
+
+        <aside class="cart-sidebar">
+          <div class="cart-content">
+            <h2>Your Cart (<span id="cartCount">0</span>)</h2>
+            <div id="cartItems" class="cart-items">
+              <!-- Cart items will be populated by JavaScript -->
+            </div>
+            <div class="cart-footer">
+              <div class="cart-total">
+                <span>Order Total</span>
+                <span id="cartTotal">$0.00</span>
+              </div>
+              <div class="delivery-info">
+                <span class="eco-friendly"
+                  >🌱 This is a carbon-neutral delivery</span
+                >
+              </div>
+              <button id="confirmOrder" class="confirm-button">
+                Confirm Order
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Order confirmation modal -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Order Confirmed</h2>
+          <p>We hope you enjoy your food!</p>
+        </div>
+        <div class="modal-body" id="modalOrderSummary">
+          <!-- Order summary will be populated by JavaScript -->
+        </div>
+        <button class="new-order-button" id="startNewOrder">
+          Start New Order
+        </button>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
