@@ -8,17 +8,22 @@ function createMenuItem(item) {
   const div = document.createElement("div");
   div.className = "menu-item";
   div.innerHTML = `
-        <img src="${item.image}" alt="${item.name}">
-        <div class="menu-item-content">
-            <div class="menu-item-category">${item.category}</div>
-            <h3 class="menu-item-title">${item.name}</h3>
-            <div class="menu-item-price">${formatPrice(item.price)}</div>
-            <div class="quantity-control" style="display: none;">
+        <div class="cart-container">
+           <img src="${item.image}" alt="${item.name}">
+
+           <div class="quantity-control" style="display: none;">
                 <button class="quantity-button minus" disabled>-</button>
                 <span class="quantity">1</span>
                 <button class="quantity-button plus">+</button>
             </div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i>   Add to Cart</button>
+        </div>
+      
+        <div class="menu-item-content">
+            <div class="menu-item-category">${item.category}</div>
+            <h3 class="menu-item-title">${item.name}</h3>
+            <div class="menu-item-price">${formatPrice(item.price)}</div>
+            
         </div>
     `;
 
@@ -78,9 +83,9 @@ function renderCart() {
             <img src="${item.image}" alt="${item.name}">
             <div class="cart-item-details">
                 <span class="cart-item-title">${item.name}</span>
-                <span class="cart-item-price">${quantity}x @ ${formatPrice(
+                <div class="cart-item-price"><span class="item-num">${quantity}x</span class="item-price"> <span> @ ${formatPrice(
       item.price
-    )}</span>
+    )}</span></div>
             </div>
             <button class="remove-item" data-id="${item.id}">×</button>
         `;
@@ -101,10 +106,13 @@ function renderCart() {
       const menuItem = document
         .querySelector(`[data-id="${id}"]`)
         .closest(".menu-item");
+
+      console.log(menuItem);
       if (menuItem) {
         menuItem.querySelector(".quantity-control").style.display = "none";
         menuItem.querySelector(".add-to-cart").style.display = "block";
         menuItem.querySelector(".quantity").textContent = "1";
+
         menuItem.querySelector(".minus").disabled = true;
       }
 
