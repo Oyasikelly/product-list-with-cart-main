@@ -1,4 +1,5 @@
 let cart = new Map();
+let isSelected = false;
 
 function formatPrice(price) {
   return `$${price.toFixed(2)}`;
@@ -9,8 +10,11 @@ function createMenuItem(item) {
   div.className = "menu-item";
   div.innerHTML = `
         <div class="cart-container">
-           <img src="${item.image}" alt="${item.name}">
-
+        
+        <img class="img-container" data-id=${item.id} src="${
+    item.image
+  }" alt="${item.name}">
+      
            <div class="quantity-control" style="display: none;">
                 <button class="quantity-button minus" disabled>-</button>
                 <span class="quantity">1</span>
@@ -28,12 +32,15 @@ function createMenuItem(item) {
     `;
 
   const quantityControl = div.querySelector(".quantity-control");
+  const selectedCart = div.querySelector(".img-container");
   const addToCartBtn = div.querySelector(".add-to-cart");
   const minusBtn = div.querySelector(".minus");
   const plusBtn = div.querySelector(".plus");
   const quantitySpan = div.querySelector(".quantity");
 
   addToCartBtn.addEventListener("click", () => {
+    isSelected = true;
+    selectedCart.classList.add("selected-cart");
     quantityControl.style.display = "flex";
     addToCartBtn.style.display = "none";
     updateCart(item, 1);
@@ -42,6 +49,8 @@ function createMenuItem(item) {
   minusBtn.addEventListener("click", () => {
     const currentQty = parseInt(quantitySpan.textContent);
     if (currentQty > 1) {
+      // selectedCart.classList.add("selected-cart");
+      clicked = true;
       quantitySpan.textContent = currentQty - 1;
       minusBtn.disabled = currentQty - 1 === 1;
       updateCart(item, currentQty - 1);
@@ -107,13 +116,15 @@ function renderCart() {
         .querySelector(`[data-id="${id}"]`)
         .closest(".menu-item");
 
-      console.log(menuItem);
       if (menuItem) {
         menuItem.querySelector(".quantity-control").style.display = "none";
         menuItem.querySelector(".add-to-cart").style.display = "block";
         menuItem.querySelector(".quantity").textContent = "1";
-
         menuItem.querySelector(".minus").disabled = true;
+        menuItem
+          .querySelector(".img-container")
+          .classList.remove("selected-cart");
+        // });
       }
 
       renderCart();
@@ -157,6 +168,13 @@ function showOrderConfirmation() {
 }
 
 // Initialize the menu
+
+// slide down menu in other to see full screen
+const cartSidebar = document.querySelector(".cart-sidebar");
+document.querySelector(".slideDown").addEventListener("click", () => {
+  cartSidebar.classList.toggle("slideDownTransition");
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const menuGrid = document.getElementById("menuGrid");
   menuItems.forEach((item) => {
@@ -172,6 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cart.clear();
     renderCart();
     document.getElementById("orderModal").style.display = "none";
+    document.querySelectorAll(".img-container").forEach((item) => {
+      item.classList.remove("selected-cart");
+    });
 
     // Reset all quantity controls
     document.querySelectorAll(".quantity-control").forEach((control) => {

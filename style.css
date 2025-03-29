@@ -32,6 +32,7 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
 }
 
 header {
@@ -54,6 +55,9 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+}
+.menu-container .selected-cart {
+  border: 2px solid var(--red);
 }
 
 .menu-item {
@@ -159,7 +163,6 @@ h1 {
   background: var(--red);
   color: white;
 }
-
 /* Cart Sidebar */
 .cart-sidebar {
   background: white;
@@ -168,6 +171,11 @@ h1 {
   position: sticky;
   top: 2rem;
   height: fit-content;
+  transition: height 0.5s ease-in;
+  overflow-y: scroll;
+}
+.cart-sidebar::-webkit-scrollbar {
+  display: none;
 }
 .cart-sidebar h2 {
   color: var(--red);
@@ -176,6 +184,9 @@ h1 {
   margin: 1.5rem 0;
   max-height: 400px;
   overflow-y: auto;
+}
+.cart-items::-webkit-scrollbar {
+  display: none;
 }
 
 .cart-item {
@@ -270,18 +281,25 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+  z-index: 10;
+  overflow-y: scroll;
+  padding-top: 20rem;
 }
 
 .modal-content {
   background: white;
+  /* margin-top: 22rem; */
+  margin-bottom: 2rem;
+  /* position: relative; */
   padding: 2rem;
   border-radius: 12px;
   max-width: 480px;
   width: 90%;
+  height: auto;
 }
 
 .modal-header {
@@ -329,7 +347,24 @@ h1 {
     border-radius: 12px 12px 0 0;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     max-height: 80vh;
+    transition: height 0.5s ease-in;
     overflow-y: auto;
+  }
+  .slideDownBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .slideDown {
+    width: 80px;
+    height: 6px;
+    background-color: gray;
+    border-radius: 12px;
+  }
+  .slideDownTransition {
+    height: 0%;
   }
 }
 
@@ -341,5 +376,25 @@ h1 {
   .menu-grid {
     grid-template-columns: 1fr;
     padding-bottom: 20rem;
+  }
+
+  .cart-sidebar {
+    transition: height 0.5s ease-in;
+  }
+  .slideDownBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .slideDown {
+    width: 80px;
+    height: 6px;
+    background-color: gray;
+    border-radius: 12px;
+  }
+  .slideDownTransition {
+    height: 0%;
   }
 }

@@ -27,6 +27,7 @@
         </section>
 
         <aside class="cart-sidebar">
+          <div class="slideDownBtn"><div class="slideDown"></div></div>
           <div class="cart-content">
             <h2>Your Cart (<span id="cartCount">0</span>)</h2>
             <div id="cartItems" class="cart-items">
@@ -53,16 +54,18 @@
     <!-- Order confirmation modal -->
     <div id="orderModal" class="modal">
       <div class="modal-content">
-        <div class="modal-header">
-          <h2>Order Confirmed</h2>
-          <p>We hope you enjoy your food!</p>
+        <div class="scroll-model">
+          <div class="modal-header">
+            <h2>Order Confirmed</h2>
+            <p>We hope you enjoy your food!</p>
+          </div>
+          <div class="modal-body" id="modalOrderSummary">
+            <!-- Order summary will be populated by JavaScript -->
+          </div>
+          <button class="new-order-button" id="startNewOrder">
+            Start New Order
+          </button>
         </div>
-        <div class="modal-body" id="modalOrderSummary">
-          <!-- Order summary will be populated by JavaScript -->
-        </div>
-        <button class="new-order-button" id="startNewOrder">
-          Start New Order
-        </button>
       </div>
     </div>
 
